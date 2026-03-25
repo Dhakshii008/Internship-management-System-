@@ -95,7 +95,8 @@ function addIntern() {
     return;
   }
 
-  fetch("https://internship-management-system-5om2.onrender.com/internships", {
+  // ✅ FIXED HERE (NO FULL URL)
+  fetch("/internships", {
     method: "POST",
     headers: {
       "Content-Type": "application/json"

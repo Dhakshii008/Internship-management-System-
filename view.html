@@ -87,8 +87,10 @@
 </div>
 
 <script>
+
+// ✅ LOAD DATA
 function loadData() {
-  fetch("https://internship-management-system-5om2.onrender.com/internships")
+  fetch("/internships")   // 🔥 FIXED (no full URL)
   .then(res => res.json())
   .then(data => {
     let list = document.getElementById("list");
@@ -114,19 +116,20 @@ function loadData() {
   });
 }
 
-// DELETE FUNCTION
+// ✅ DELETE FUNCTION
 function deleteIntern(id){
-  fetch(`https://internship-management-system-5om2.onrender.com/internships/${id}`, {
+  fetch(`/internships/${id}`, {   // 🔥 FIXED
     method: "DELETE"
   })
   .then(res => res.json())
   .then(() => {
     alert("Deleted Successfully");
-    loadData(); // refresh list
+    loadData();
   });
 }
 
 loadData();
+
 </script>
 
 </body>
