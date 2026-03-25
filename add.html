@@ -95,8 +95,7 @@ function addIntern() {
     return;
   }
 
-  // ✅ FIXED HERE (NO FULL URL)
-  fetch("/internships", {
+  fetch("/internships", {   // ✅ IMPORTANT (no localhost, no full URL)
     method: "POST",
     headers: {
       "Content-Type": "application/json"
