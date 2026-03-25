@@ -68,6 +68,7 @@
 <body>
 
 <nav>
+  <a href="index.html">Home</a>
   <a href="add.html">Add</a>
   <a href="view.html">View</a>
 </nav>
@@ -86,8 +87,6 @@
 <script>
 function addIntern() {
 
-  alert("Button clicked!"); // 🔥 test
-
   const title = document.getElementById("title").value;
   const stipend = document.getElementById("stipend").value;
 
@@ -96,7 +95,7 @@ function addIntern() {
     return;
   }
 
-  fetch("http://localhost:5000/internships", {
+  fetch("https://internship-management-system-5om2.onrender.com/internships", {
     method: "POST",
     headers: {
       "Content-Type": "application/json"
@@ -110,13 +109,12 @@ function addIntern() {
   })
   .then(res => res.json())
   .then(data => {
-    console.log("Saved:", data);
-    alert("Added Successfully!");
-    window.location.href = "view.html"; // 🔥 redirect
+    alert("✅ Added Successfully!");
+    window.location.href = "view.html";
   })
   .catch(err => {
     console.error(err);
-    alert("Error occurred");
+    alert("❌ Error occurred");
   });
 }
 </script>

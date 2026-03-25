@@ -55,12 +55,28 @@
       font-weight: bold;
       color: #ff512f;
     }
+
+    .delete-btn {
+      margin-top: 10px;
+      padding: 8px 15px;
+      border: none;
+      border-radius: 20px;
+      background: #ff4d4d;
+      color: white;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .delete-btn:hover {
+      transform: scale(1.1);
+    }
   </style>
 </head>
 
 <body>
 
 <nav>
+  <a href="index.html">Home</a>
   <a href="add.html">Add</a>
   <a href="view.html">View</a>
 </nav>
@@ -72,11 +88,16 @@
 
 <script>
 function loadData() {
-  fetch("http://localhost:5000/internships")
+  fetch("https://internship-management-system-5om2.onrender.com/internships")
   .then(res => res.json())
   .then(data => {
     let list = document.getElementById("list");
     list.innerHTML = "";
+
+    if(data.length === 0){
+      list.innerHTML = "<p>No internships available</p>";
+      return;
+    }
 
     data.forEach(i => {
       let div = document.createElement("div");
@@ -85,10 +106,23 @@ function loadData() {
       div.innerHTML = `
         <div class="title">${i.title}</div>
         <p>Stipend: ₹${i.stipend}</p>
+        <button class="delete-btn" onclick="deleteIntern('${i._id}')">Delete</button>
       `;
 
       list.appendChild(div);
     });
+  });
+}
+
+// DELETE FUNCTION
+function deleteIntern(id){
+  fetch(`https://internship-management-system-5om2.onrender.com/internships/${id}`, {
+    method: "DELETE"
+  })
+  .then(res => res.json())
+  .then(() => {
+    alert("Deleted Successfully");
+    loadData(); // refresh list
   });
 }
 
