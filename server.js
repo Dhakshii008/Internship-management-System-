@@ -8,35 +8,28 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-/* =========================
-   MongoDB Connection
-========================= */
+// 🔥 Serve frontend files (VERY IMPORTANT)
+app.use(express.static(__dirname));
+
+// MongoDB connection
 mongoose.connect(process.env.MONGO_URI)
-  .then(() => console.log("✅ MongoDB Connected"))
-  .catch(err => console.log("❌ MongoDB Error:", err));
+.then(() => console.log("MongoDB Connected"))
+.catch(err => console.log(err));
 
-/* =========================
-   Schema & Model
-========================= */
-const InternshipSchema = new mongoose.Schema({
-  internship_id: Number,
-  title: String,
-  company_id: Number,
-  stipend: Number
-});
+// Flexible schema
+const internshipSchema = new mongoose.Schema({}, { strict: false });
+const Internship = mongoose.model("Internship", internshipSchema);
 
-const Internship = mongoose.model("Internship", InternshipSchema);
+// =======================
+// ROUTES
+// =======================
 
-/* =========================
-   Routes
-========================= */
-
-// Root check
+// 🔹 Home route
 app.get("/", (req, res) => {
-  res.send("🚀 Server is running successfully");
+  res.sendFile(__dirname + "/index.html");
 });
 
-// Get all internships
+// 🔹 GET all internships
 app.get("/internships", async (req, res) => {
   try {
     const data = await Internship.find();
@@ -46,18 +39,18 @@ app.get("/internships", async (req, res) => {
   }
 });
 
-// Add internship
+// 🔹 ADD internship
 app.post("/internships", async (req, res) => {
   try {
-    const newInternship = new Internship(req.body);
-    await newInternship.save();
-    res.json(newInternship);
+    const newIntern = new Internship(req.body);
+    await newIntern.save();
+    res.json({ message: "Added successfully" });
   } catch (err) {
     res.status(500).json(err);
   }
 });
 
-// Delete internship
+// 🔹 DELETE internship
 app.delete("/internships/:id", async (req, res) => {
   try {
     await Internship.findByIdAndDelete(req.params.id);
@@ -67,9 +60,9 @@ app.delete("/internships/:id", async (req, res) => {
   }
 });
 
-/* =========================
-   Server Start
-========================= */
+// =======================
+// SERVER START
+// =======================
 const PORT = process.env.PORT || 5000;
 
 app.listen(PORT, () => {
