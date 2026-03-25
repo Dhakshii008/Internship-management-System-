@@ -9,7 +9,7 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-// ✅ VERY IMPORTANT (YOU MISSED THIS)
+// ✅ VERY IMPORTANT
 app.use(express.static(__dirname));
 
 // MongoDB
@@ -21,7 +21,7 @@ mongoose.connect(process.env.MONGO_URI)
 const schema = new mongoose.Schema({}, { strict: false });
 const Internship = mongoose.model("Internship", schema);
 
-// ✅ SHOW index.html
+// ✅ HOME PAGE
 app.get("/", (req, res) => {
   res.sendFile(path.join(__dirname, "index.html"));
 });
@@ -45,7 +45,7 @@ app.delete("/internships/:id", async (req, res) => {
   res.json({ message: "Deleted successfully" });
 });
 
-// START SERVER
+// SERVER
 const PORT = process.env.PORT || 5000;
 
 app.listen(PORT, () => {
