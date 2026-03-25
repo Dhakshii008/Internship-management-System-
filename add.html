@@ -23,12 +23,6 @@
       margin: 20px;
       text-decoration: none;
       font-weight: bold;
-      transition: 0.3s;
-    }
-
-    nav a:hover {
-      color: yellow;
-      transform: scale(1.1);
     }
 
     .box {
@@ -56,11 +50,6 @@
       border: none;
       border-radius: 25px;
       cursor: pointer;
-      transition: 0.3s;
-    }
-
-    button:hover {
-      transform: scale(1.1);
     }
   </style>
 </head>
@@ -68,9 +57,9 @@
 <body>
 
 <nav>
-  <a href="index.html">Home</a>
-  <a href="add.html">Add</a>
-  <a href="view.html">View</a>
+  <a href="/">Home</a>
+  <a href="/add.html">Add</a>
+  <a href="/view.html">View</a>
 </nav>
 
 <div class="box">
@@ -95,27 +84,25 @@ function addIntern() {
     return;
   }
 
-  fetch("/internships", {   // ✅ IMPORTANT (no localhost, no full URL)
+  fetch("/internships", {
     method: "POST",
     headers: {
       "Content-Type": "application/json"
     },
     body: JSON.stringify({
-      internship_id: Date.now(),
       title: title,
-      company_id: 999,
       stipend: Number(stipend)
     })
   })
   .then(res => res.json())
-  .then(data => {
-    alert("✅ Added Successfully!");
-    window.location.href = "view.html";
+  .then(() => {
+    alert("Added Successfully");
+    window.location.href = "/view.html";
   })
-  .catch(err => {
-    console.error(err);
-    alert("❌ Error occurred");
+  .catch(() => {
+    alert("Error occurred");
   });
+
 }
 </script>
 
