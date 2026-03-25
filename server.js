@@ -1,22 +1,29 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
+const path = require("path");
 
 const app = express();
 
-// Middleware
+// =======================
+// MIDDLEWARE
+// =======================
 app.use(cors());
 app.use(express.json());
 
-// 🔥 Serve frontend files (VERY IMPORTANT)
+// 🔥 SERVE FRONTEND FILES (VERY IMPORTANT)
 app.use(express.static(__dirname));
 
-// MongoDB connection
+// =======================
+// MONGODB CONNECTION
+// =======================
 mongoose.connect(process.env.MONGO_URI)
-.then(() => console.log("MongoDB Connected"))
-.catch(err => console.log(err));
+  .then(() => console.log("MongoDB Connected"))
+  .catch(err => console.log(err));
 
-// Flexible schema
+// =======================
+// SCHEMA (Flexible)
+// =======================
 const internshipSchema = new mongoose.Schema({}, { strict: false });
 const Internship = mongoose.model("Internship", internshipSchema);
 
@@ -24,12 +31,12 @@ const Internship = mongoose.model("Internship", internshipSchema);
 // ROUTES
 // =======================
 
-// 🔹 Home route
+// ✅ Home route (serve index.html)
 app.get("/", (req, res) => {
-  res.sendFile(__dirname + "/index.html");
+  res.sendFile(path.join(__dirname, "index.html"));
 });
 
-// 🔹 GET all internships
+// ✅ GET all internships
 app.get("/internships", async (req, res) => {
   try {
     const data = await Internship.find();
@@ -39,7 +46,7 @@ app.get("/internships", async (req, res) => {
   }
 });
 
-// 🔹 ADD internship
+// ✅ ADD internship
 app.post("/internships", async (req, res) => {
   try {
     const newIntern = new Internship(req.body);
@@ -50,7 +57,7 @@ app.post("/internships", async (req, res) => {
   }
 });
 
-// 🔹 DELETE internship
+// ✅ DELETE internship
 app.delete("/internships/:id", async (req, res) => {
   try {
     await Internship.findByIdAndDelete(req.params.id);
