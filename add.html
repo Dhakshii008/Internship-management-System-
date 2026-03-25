@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Add Internship</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
+
+  <style>
+    body {
+      font-family: 'Poppins';
+      margin: 0;
+      background: linear-gradient(120deg, #ff9a9e, #fad0c4);
+      text-align: center;
+    }
+
+    nav {
+      background: linear-gradient(to right, #ff512f, #dd2476);
+      padding: 15px;
+    }
+
+    nav a {
+      color: white;
+      margin: 20px;
+      text-decoration: none;
+      font-weight: bold;
+      transition: 0.3s;
+    }
+
+    nav a:hover {
+      color: yellow;
+      transform: scale(1.1);
+    }
+
+    .box {
+      background: white;
+      width: 40%;
+      margin: 60px auto;
+      padding: 30px;
+      border-radius: 15px;
+      box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+    }
+
+    input {
+      padding: 12px;
+      margin: 10px;
+      width: 80%;
+      border-radius: 20px;
+      border: none;
+      box-shadow: 0 3px 8px rgba(0,0,0,0.2);
+    }
+
+    button {
+      padding: 12px 25px;
+      background: linear-gradient(to right, #ff512f, #dd2476);
+      color: white;
+      border: none;
+      border-radius: 25px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    button:hover {
+      transform: scale(1.1);
+    }
+  </style>
+</head>
+
+<body>
+
+<nav>
+  <a href="add.html">Add</a>
+  <a href="view.html">View</a>
+</nav>
+
+<div class="box">
+  <h2>Add Internship</h2>
+
+  <input id="title" placeholder="Enter Title">
+  <input id="stipend" placeholder="Enter Stipend">
+
+  <br><br>
+
+  <button onclick="addIntern()">Add Internship</button>
+</div>
+
+<script>
+function addIntern() {
+
+  alert("Button clicked!"); // 🔥 test
+
+  const title = document.getElementById("title").value;
+  const stipend = document.getElementById("stipend").value;
+
+  if (!title || !stipend) {
+    alert("Enter all fields");
+    return;
+  }
+
+  fetch("http://localhost:5000/internships", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({
+      internship_id: Date.now(),
+      title: title,
+      company_id: 999,
+      stipend: Number(stipend)
+    })
+  })
+  .then(res => res.json())
+  .then(data => {
+    console.log("Saved:", data);
+    alert("Added Successfully!");
+    window.location.href = "view.html"; // 🔥 redirect
+  })
+  .catch(err => {
+    console.error(err);
+    alert("Error occurred");
+  });
+}
+</script>
+
+</body>
+</html>

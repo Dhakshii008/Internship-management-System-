@@ -1,92 +1,124 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <title>My Website</title>
+  <title>Internship Management System</title>
 
-    <style>
-        body {
-            margin: 0;
-            font-family: Arial;
-            background: linear-gradient(to right, #667eea, #764ba2);
-            color: white;
-        }
+  <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
 
-        header {
-            background: rgba(0,0,0,0.6);
-            padding: 15px;
-        
-            text-align: center;
-        }
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      margin: 0;
+      background: linear-gradient(135deg, #89f7fe, #66a6ff);
+    }
 
-        nav a {
-            color: white;
-            margin: 15px;
-            text-decoration: none;
-            font-size: 18px;
-            transition: 0.3s;
-        }
+    /* NAVBAR */
+    nav {
+      background: linear-gradient(to right, #ff512f, #dd2476);
+      padding: 15px;
+      text-align: center;
+    }
 
-        nav a:hover {
-            color: yellow;
-            font-size: 20px;
-        }
+    nav a {
+      color: white;
+      margin: 20px;
+      text-decoration: none;
+      font-weight: bold;
+      transition: 0.3s;
+    }
 
-        .container {
-            text-align: center;
-            padding: 80px;
-        }
+    nav a:hover {
+      color: yellow;
+      transform: scale(1.1);
+    }
 
-        .btn {
-            background: yellow;
-            color: black;
-            padding: 10px 20px;
-            border: none;
-            cursor: pointer;
-            font-size: 18px;
-            transition: 0.3s;
-        }
+    /* HERO */
+    .hero {
+      text-align: center;
+      padding: 50px;
+      color: #333;
+    }
 
-        .btn:hover {
-            background: orange;
-            transform: scale(1.1);
-        }
+    .hero h1 {
+      font-size: 38px;
+    }
 
-        footer {
-            text-align: center;
-            padding: 10px;
-            background: rgba(0,0,0,0.6);
-            position: fixed;
-            bottom: 0;
-            width: 100%;
-        }
-    </style>
+    .hero p {
+      font-size: 18px;
+    }
+
+    /* CONTAINER */
+    .container {
+      width: 85%;
+      margin: auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+    }
+
+    /* CARD */
+    .card {
+      background: linear-gradient(135deg, #ffffff, #ffe6f0);
+      padding: 25px;
+      border-radius: 30px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+      transition: 0.4s;
+      text-align: center;
+    }
+
+    .card:hover {
+      transform: translateY(-10px) scale(1.05);
+      box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+    }
+
+    .card h2 {
+      color: #ff4d88;
+    }
+
+    .card p {
+      color: #333;
+      font-size: 15px;
+    }
+
+  </style>
 </head>
 
 <body>
 
-<header>
-    <h1>My Website</h1>
-    <nav>
-        <a href="index.html">Home</a>
-        <a href="about.html">About</a>
-        <a href="contact.html">Contact</a>
-        <a href="services.html">Services</a>
-    </nav>
-</header>
+<nav>
+  <a href="index.html">Home</a>
+  <a href="add.html">Add</a>
+  <a href="view.html">View</a>
+</nav>
 
-<div class="container">
-    <h2>Welcome to My Website 🚀</h2>
-    <p>This is my first website.</p>
-
-    <button class="btn" onclick="window.location.href='about.html'">
-        Go to About Page
-    </button>
+<div class="hero">
+  <h1>🚀 Internship Management System</h1>
+  <p>Explore roles • Gain skills • Earn stipend 💼</p>
 </div>
 
-<footer>
-    <p>© 2026 My Website</p>
-</footer>
+<div class="container">
+
+  <div class="card">
+    <h2>💼 Internships</h2>
+    <p>Gain real-world experience and build your career with practical skills.</p>
+  </div>
+
+  <div class="card">
+    <h2>💰 Stipend</h2>
+    <p>Earn while learning and grow your confidence with real projects.</p>
+  </div>
+
+  <div class="card">
+    <h2>🌐 Roles</h2>
+    <p>Frontend, Backend, Data Analyst, UI/UX and more opportunities.</p>
+  </div>
+
+  <div class="card">
+    <h2>🚀 Growth</h2>
+    <p>Improve skills, teamwork and become job-ready for future careers.</p>
+  </div>
+
+</div>
 
 </body>
 </html>
